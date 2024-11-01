@@ -4,17 +4,24 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="Pokedle vs">
 	<main>
-		<form>
+		<p>Checking server... please wait</p>
+	
+		<form style="visibility: hidden">
 			<input name="username" placeholder="Username" required/>
 			<input name="room_name" placeholder="Room name" />
 			<input name="room_id" placeholder="Room ID" />
-			<button type="submit">Submit</button>
+			<button type="submit" disabled>Go!</button>
 		</form>
 	</main>
 </Layout>
 
 <script>
+	import { serverUrl } from '../consts/urls';
+
 	const $form = document.querySelector('form')
+	const $submitBtn = document.querySelector('button')
+	const $loading = document.querySelector('p')
+
 	$form?.addEventListener('submit', e => {
 		e.preventDefault();
 		const formData = new FormData(e.target as HTMLFormElement);
@@ -23,4 +30,13 @@ import Layout from '../layouts/Layout.astro';
 		if (!room_name && !room_id) return alert('Invalid form')
 		location.href = `/room?username=${username}&room_name=${room_name}&room_id=${room_id}`;
 	});
+
+	const res = await fetch(serverUrl)
+	if (res.ok) {
+		$submitBtn?.removeAttribute('disabled')
+		$loading?.remove()
+		if ($form) $form.style.visibility = 'visible'
+	} else {
+		if ($loading) $loading.textContent = 'Server is unavailable'
+	}
 </script>
