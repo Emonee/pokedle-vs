@@ -28,7 +28,7 @@ import Layout from '../layouts/Layout.astro';
 		const { username, room_name, room_id } = Object.fromEntries(formData);
 		if (!username) return alert('Username is required')
 		if (!room_name && !room_id) return alert('Invalid form')
-		location.href = `/room?username=${username}&room_name=${room_name}&room_id=${room_id}`;
+		location.href = `/pokedle-vs/room?username=${username}&room_name=${room_name}&room_id=${room_id}`;
 	});
 
 	const res = await fetch(serverUrl)
