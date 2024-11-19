@@ -3,9 +3,12 @@ name: Deploy static content to Pages
 on:
   push:
     branches: ['main']
-  paths:
-    - 'client/**' # Trigger only if files in the client directory change
+    paths:
+      - 'client/**' # Trigger only if files in the client directory change
   workflow_dispatch:
+
+env:
+  VITE_SERVER_URL: ${{ vars.SERVER_URL }}
 
 permissions:
   contents: read
