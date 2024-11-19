@@ -2,7 +2,9 @@
   import pokemons from "../assets/pokemons.json";
   import { gameState } from "../states/game.svelte";
   import { sendMessage } from "../states/socket.svelte";
+
   const pkmList = Object.entries(pokemons.pokemons).sort(([id], [id2]) => +id - +id2) 
+
   const onsubmit = (e: SubmitEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
@@ -22,8 +24,7 @@
     {/each}
   </select>
   <button>I chooose you!</button>
-
-  {#each gameState.plays as play}
-    <p>{play.player.user_name} played {play.pokemon.name}</p>
-  {/each}
 </form>
+{#each gameState.plays as play (play.pokemon.name)}
+  <p>{JSON.stringify(play)}</p>
+{/each}
