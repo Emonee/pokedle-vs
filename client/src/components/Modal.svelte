@@ -18,7 +18,7 @@
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-<dialog bind:this={dialog} {onclick} class="p-5 rounded-md relative">
+<dialog bind:this={dialog} {onclick} class="p-5 rounded-md relative max-w-2xl">
   <form method="dialog" class="absolute top-2 right-2">
     <button class="size-7 hover:bg-slate-200 rounded-md"><Close /></button>
   </form>
