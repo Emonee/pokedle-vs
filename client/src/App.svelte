@@ -7,17 +7,18 @@
   import { Page, state } from "./pages/page.svelte";
   import Room from "./pages/Room.svelte";
   import Root from "./pages/Root.svelte";
-  import { fetchServerHealth } from "./services";
+  import { fetchServerHealth, prefetchImages } from "./services";
 
   const pages = {
     [Page.ROOT]: Root,
     [Page.ROOM]: Room
   }
   const ActualPage = $derived(pages[state.page] || Root);
+  prefetchImages()
 </script>
 
 <Header />
-<main class="p-4">
+<main class="p-4 max-w-[100dvw]">
   {#await fetchServerHealth()}
     <LoadingServer />
   {:then response} 
