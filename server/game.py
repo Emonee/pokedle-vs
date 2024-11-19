@@ -36,7 +36,7 @@ class Play:
     
     def to_dict(self):
         return {
-            'player': { 'name': self.player.name, 'tag': self.player.tag },
+            'player': { 'user_name': self.player.name, 'user_tag': self.player.tag },
             'pokemon': self.pokemon.__dict__,
             'matching_results': {
                 'type1': self.match_type1,

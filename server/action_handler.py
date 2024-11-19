@@ -6,7 +6,8 @@ async def main_handler(message, room, user):
     try:
         action = message.get('action')
         if action == 'start_game': start_game(room)
-        if action == 'play': play(room, user, message)
+        elif action == 'play': play(room, user, message)
+        else: raise InvalidAction(f"Invalid action: {action}")
     except InvalidAction as e:
         await user.send_message(json.dumps({
             'error': True,
@@ -23,14 +24,14 @@ def start_game(room):
     room.broadcast_room({
         'action': 'start_game',
         'data': {
-            'room_name': room.name,
-            'room_id': room.id
+            'room_name': room.name
         }
     })
 
 def play(room, user, message):
-    pokemon_number = message['data']['pokemon_number']
     if not room.game: raise InvalidAction("Game is not started")
+    pokemon_number = message['data']['pokemon_number']
+    if not pokemon_number: raise InvalidAction("Pokemon number is required")
     play = room.game.play(user, pokemon_number)
     room.broadcast_room({
         'action': 'play',

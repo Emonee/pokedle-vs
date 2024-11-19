@@ -3,6 +3,8 @@ name: Deploy static content to Pages
 on:
   push:
     branches: ['main']
+  paths:
+    - 'client/**' # Trigger only if files in the client directory change
   workflow_dispatch:
 
 permissions:

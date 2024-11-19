@@ -22,36 +22,24 @@ async def handler(websocket):
     query_params = parse_qs(parsed_url.query)
     user_name = query_params.get("user_name", [None])[0]
     room_name = query_params.get("room_name", [None])[0]
-    room_id = query_params.get("room_id", [None])[0]
+    if not room_name or not user_name:
+        await websocket.close(reason="user_name and room_name are required")
+        return
     try:
         user = User(user_name, websocket)
-        room = Room.find_room(room_id) if room_id else Room(room_name, user)
-        if not room: raise Exception("Room not found")
+        room = Room.find_or_create_room(room_name, user)
     except Exception as e:
         user.disconnect()
         await websocket.close(reason=str(e))
         return
-    if room_name: await user.send_message(json.dumps({
-        'action': 'start_room',
+    room.add_user(user)
+    await user.send_message(json.dumps({
+        'action': 'room_users',
         'data': {
             'room_name': room.name,
-            'room_id': room.id,
-            'initial_player': {
-                'user_name': user.name,
-                'user_tag': user.tag
-            }
+            'users': [{ 'user_name': user.name, 'user_tag': user.tag } for user in room.users]
         }
     }))
-    elif room_id:
-        await user.send_message(json.dumps({
-            'action': 'room_users',
-            'data': {
-                'room_name': room.name,
-                'room_id': room.id,
-                'users': [{ 'user_name': user.name, 'user_tag': user.tag } for user in room.users]
-            }
-        }))
-        room.add_user(user)
     async for json_message in websocket:
         message = json.loads(json_message)
         await main_handler(message, room, user)

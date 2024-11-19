@@ -8,6 +8,8 @@ CONNECTED_USERS = {}
 
 class User:
     def __init__(self, name, socket):
+        if not name:
+            raise Exception("User name is required")
         if self.full_users():
             raise Exception("Maximum number of users reached")
         if len(name) > 15:

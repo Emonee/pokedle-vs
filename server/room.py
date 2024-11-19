@@ -15,11 +15,10 @@ class Room:
             raise Exception("Maximum number of rooms reached")
         if len(name) > 15:
             raise ValueError("Room's name must be less than 15 characters")
-        self.id = f"{randint(0, 9999):04}"
         self.name = name
         self.users = {user}
         self.game = None
-        ROOMS[self.id] = self
+        ROOMS[name] = self
     
     def __str__(self):
         return f"{self.name}: {self.users}"
@@ -33,8 +32,9 @@ class Room:
         return ROOMS
     
     @staticmethod
-    def find_room(id):
-        return ROOMS[id]
+    def find_or_create_room(name, user):
+        if name in ROOMS: return ROOMS[name]
+        return Room(name, user)
     
     def broadcast_room(self, message):
         broadcast(self.room_sockets(), json.dumps(message)) # type: ignore
@@ -55,9 +55,9 @@ class Room:
     def remove_user(self, user):
         if user in self.users: self.users.remove(user)
         if len(self.users) < 1:
-            del ROOMS[self.id]
+            del ROOMS[self.name]
             return
-        if user in self.users: self.broadcast_room({
+        self.broadcast_room({
             'action': 'user_left',
             'data': {
                 'user_name': user.name,
