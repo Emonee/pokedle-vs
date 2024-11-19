@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  background-color: rgb(241 245 249);
+}
+
 body {
   display: grid;
   min-height: 100dvh;

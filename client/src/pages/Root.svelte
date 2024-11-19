@@ -1,5 +1,10 @@
 <script lang="ts">
+  import Input from "../components/Input.svelte";
   import { Page, state } from "./page.svelte";
+
+  const url = new URL(window.location.href);
+  const roomName = url.searchParams.get('room_name');
+
   const onsubmit = (e: SubmitEvent) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target as HTMLFormElement));
@@ -14,10 +19,10 @@
   }
 </script>
 
-<main>
-  <form {onsubmit}>
-    <input type="text" name="userName" required>
-    <input type="text" name="roomName" required>
-    <button>Join/Create Room</button>
+<section class="flex justify-center items-center h-full">
+  <form {onsubmit} class="flex flex-col justify-center gap-4 items-center">
+    <Input type="text" name="userName" placeholder="User name" class="border-2 border-slate-400 rounded-md"  required />
+    <Input type="text" name="roomName" placeholder="Room name" class="border-2 border-slate-400 rounded-md" value={roomName} required />
+    <button class="bg-green-500 rounded-md p-4 hover:bg-green-600 font-bold tracking-wide transition">Join/Create Room</button>
   </form>
-</main>
+</section>

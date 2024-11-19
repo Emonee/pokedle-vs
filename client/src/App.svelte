@@ -13,7 +13,7 @@
 </script>
 
 <Header />
-<main class="p-4 bg-slate-200">
+<main class="p-4">
   <ActualPage />
 </main>
 <Footer />
