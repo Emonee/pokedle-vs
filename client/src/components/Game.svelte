@@ -4,7 +4,9 @@
   import { sendMessage } from "../states/socket.svelte";
   import Play from "./Play.svelte";
 
-  const pkmList = Object.entries(pokemons.pokemons).sort(([id], [id2]) => +id - +id2) 
+  let selectedPkm = '0'
+
+  const pkmList = Object.values(pokemons.pokemons).sort((pkm1, pkm2) => +pkm1.id - +pkm2.id)
 
   const onsubmit = (e: SubmitEvent) => {
     e.preventDefault();
@@ -17,14 +19,16 @@
   }
 </script>
 
-<form {onsubmit}>
-  <select name="pokemonNumber" required>
+<form {onsubmit} class="mx-auto flex flex-col gap-2 justify-center items-center mb-7">
+  <select name="pokemonNumber" class="px-4 py-2 border-2 border-slate-400 rounded-md" bind:value={selectedPkm} required>
     <option value="0" selected disabled>Choose a pokemon</option>
     {#each pkmList as pokemon}
-      <option value={pokemon[1].id}>{pokemon[1].name}</option>
+      <option value={pokemon.id}>{pokemon.name}</option>
     {/each}
   </select>
-  <button>I chooose you!</button>
+  {#if selectedPkm && selectedPkm !== '0'}
+    <button class="bg-purple-400 rounded-md px-4 py-2 hover:bg-purple-600 block mx-auto">I choose you!</button>
+  {/if}
 </form>
 <section class="max-w-full overflow-x-auto">
   <div class="flex flex-col gap-1 w-fit mx-auto">

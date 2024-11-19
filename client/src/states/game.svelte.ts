@@ -1,5 +1,3 @@
-import type { Play } from "../types"
-
 type Game = {
   started: boolean
   winner: string | null

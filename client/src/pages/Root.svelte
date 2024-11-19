@@ -21,8 +21,8 @@
 
 <section class="flex justify-center items-center h-full">
   <form {onsubmit} class="flex flex-col justify-center gap-4 items-center">
-    <Input type="text" name="userName" placeholder="User name" class="border-2 border-slate-400 rounded-md"  required />
-    <Input type="text" name="roomName" placeholder="Room name" class="border-2 border-slate-400 rounded-md" value={roomName} required />
+    <Input type="text" name="userName" placeholder="User name" class="border-2 border-slate-400 rounded-md" maxlength={15} required />
+    <Input type="text" name="roomName" placeholder="Room name" class="border-2 border-slate-400 rounded-md" maxlength={15} value={roomName} required />
     <button class="bg-green-500 rounded-md p-4 hover:bg-green-600 font-bold transition">Join<span class="bg-inherit mx-1">/</span>Create Room</button>
   </form>
 </section>

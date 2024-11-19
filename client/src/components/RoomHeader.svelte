@@ -1,9 +1,12 @@
 <script lang="ts">
+  import { gameState } from "../states/game.svelte";
   import { roomState } from "../states/room.svelte";
   import { socketState } from "../states/socket.svelte";
+  import User from "./User.svelte";
 
   const roomUrl = new URL(window.location.href);
   roomUrl.searchParams.delete('user_name');
+  const startButtonText = $derived(!gameState.started ? 'Start game' : gameState.winner ? 'Go for another round!' : 'Restart Game');
 
   const copyRoomUrlToClipboard = () => {
     navigator.clipboard.writeText(roomUrl.toString())
@@ -12,13 +15,12 @@
   }
 </script>
 
-<header>
-  <button onclick={copyRoomUrlToClipboard}>Room{roomState.name}</button>
-  <p>Users:</p>
-  <ul class="list-disc">
+<header class="mb-7">
+  <button onclick={copyRoomUrlToClipboard} class="block bg-blue-400 rounded-md px-4 py-2 mx-auto hover:bg-blue-600 mb-7">Room: {roomState.name}</button>
+  <div class="flex flex-wrap gap-2 mb-5 justify-center max-w-2xl mx-auto">
     {#each roomState.users as user}
-      <li>{user.user_name}</li>
+      <User user={user} />
     {/each}
-  </ul>
-  <button onclick={() => socketState.socket?.send(JSON.stringify({ action: 'start_game' }))}>Start game</button>
+  </div>
+  <button onclick={() => socketState.socket?.send(JSON.stringify({ action: 'start_game' }))} class="bg-green-400 rounded-md px-4 py-2 hover:bg-green-600 mb-7 block mx-auto">{startButtonText}</button>
 </header>

@@ -69,6 +69,7 @@ function startGameActionHandler(messageData: MessageData, e: MessageEvent) {
 
 function playActionHandler({ data }: MessageData, e: MessageEvent) {
   gameState.plays.push(data);
+  if (data.winning_play) gameState.winner = data.player.user_name;
 }
 
 function userJoinedActionHandler({ data }: MessageData, e: MessageEvent) {
