@@ -11,8 +11,8 @@
 
 <footer class="flex justify-around flex-wrap gap-x-10 gap-y-2 p-4 shadow-[0px_-1px_6px_0px_#00000017]">
   <p class="self-center">Made with ❤️ by <a href="https://github.com/emonee" target="_blank" referrerpolicy="no-referrer" class="text-blue-600 hover:text-blue-800">Emone</a></p>
-  <div class="flex gap-2 items-center">
-    <p>Powered with:</p>
+  <div class="flex items-center">
+    <p class="mr-1">Powered with:</p>
     {#each techs as tech}
       <AnchorButton href={tech.url} target="_blank" referrerpolicy="no-referrer">
         <img src={tech.imgSrc} alt={tech.name} class="h-5 w-auto">
