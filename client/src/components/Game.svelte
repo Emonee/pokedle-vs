@@ -2,6 +2,7 @@
   import pokemons from "../assets/pokemons.json";
   import { gameState } from "../states/game.svelte";
   import { sendMessage } from "../states/socket.svelte";
+  import Play from "./Play.svelte";
 
   const pkmList = Object.entries(pokemons.pokemons).sort(([id], [id2]) => +id - +id2) 
 
@@ -25,6 +26,10 @@
   </select>
   <button>I chooose you!</button>
 </form>
-{#each gameState.plays as play (play.pokemon.name)}
-  <p>{JSON.stringify(play)}</p>
-{/each}
+<section class="max-w-full overflow-x-auto">
+  <div class="flex flex-col gap-1 w-fit mx-auto">
+    {#each gameState.plays.slice().reverse() as play (play.pokemon.name)}
+      <Play {play} />
+    {/each}
+  </div>
+</section>

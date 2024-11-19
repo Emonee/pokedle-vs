@@ -1,4 +1,3 @@
-import type { MessageData } from "../types";
 import { gameState, startGame } from "./game.svelte";
 import { roomState } from "./room.svelte";
 

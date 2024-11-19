@@ -1,32 +1,33 @@
 <script lang="ts">
   import { onDestroy, onMount } from "svelte";
   import Game from "../components/Game.svelte";
+  import RoomHeader from "../components/RoomHeader.svelte";
   import { gameState } from "../states/game.svelte";
-  import { roomState } from '../states/room.svelte';
   import { socketState, startSocket } from "../states/socket.svelte";
+
+  const roomUrl = new URL(window.location.href);
+  roomUrl.searchParams.delete('user_name');
+
+  const copyRoomUrlToClipboard = () => {
+    navigator.clipboard.writeText(roomUrl.toString())
+      .then(() => alert('Copied room url to clipboard'))
+      .catch(() => alert('Failed to copy room url to clipboard'));
+  }
 
   onMount(startSocket)
   onDestroy(() => socketState.socket?.close())
 </script>
 
-<main>
-  {#if socketState.connected}
-    <p>Room: {roomState.name}</p>
-    <p>Users:</p>
-    <ul>
-      {#each roomState.users as user}
-        <li>{user.user_name}</li>
-      {/each}
-    </ul>
-  {:else if socketState.error}
-    <p>Error: {socketState.error}</p>
-  {:else if socketState.closed}
-    <p>Connection closed: {socketState.closed.reason}</p>
-  {:else}
-    <p>Connecting...</p>
-  {/if}
-  <button onclick={() => socketState.socket?.send(JSON.stringify({ action: 'start_game' }))}>Start game</button>
-  {#if gameState.started}
-    <Game />
-  {/if}
-</main>
+{#if socketState.connected}
+  <RoomHeader />
+{:else if socketState.error}
+  <p>Error: {socketState.error}. <a href={import.meta.env.BASE_URL}>Back to home</a></p>
+{:else if socketState.closed}
+  <p>Connection closed: {socketState.closed.reason}. <a href={import.meta.env.BASE_URL}>Back to home</a></p>
+{:else}
+  <p>Connecting to server...</p>
+{/if}
+
+{#if gameState.started}
+  <Game />
+{/if}
