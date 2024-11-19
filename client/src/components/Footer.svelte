@@ -1,11 +1,11 @@
 <script lang="ts">
-    import AnchorButton from "./AnchorButton.svelte";
+  import AnchorButton from "./AnchorButton.svelte";
 
   const root = import.meta.env.BASE_URL;
   const techs = [
     { name: 'Vite', url: 'https://vitejs.dev', imgSrc: root + 'img/vite_logo.svg' },
     { name: 'Svelte', url: 'https://svelte.dev', imgSrc: root + 'img/svelte_logo.png' },
-    { name: 'Tailwind', url: 'https://tailwindcss.com', imgSrc: root + 'img/tailwind_logo.svg' },
+    { name: 'Tailwind', url: 'https://tailwindcss.com', imgSrc: root + 'img/tailwind_logo.svg', imgWidth: 34 },
   ]
 </script>
 
@@ -15,7 +15,7 @@
     <p class="mr-1">Powered with:</p>
     {#each techs as tech}
       <AnchorButton href={tech.url} target="_blank" referrerpolicy="no-referrer">
-        <img src={tech.imgSrc} alt={tech.name} class="h-5 w-auto">
+        <img src={tech.imgSrc} alt={tech.name} class="h-5 w-auto" height="20" width={tech.imgWidth ?? 20}>
       </AnchorButton>
     {/each}
   </div>
