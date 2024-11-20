@@ -9,7 +9,7 @@
   <HeaderAnchor />
   <Modal>
     {#snippet openDialog(showModal: () => void)}
-      <button onclick={showModal} class="hover:bg-slate-300 rounded-md size-8 text-blue-800"><Info /></button>
+      <button onclick={showModal} class="size-8 text-blue-800"><Info /></button>
     {/snippet}
     <h3 class="text-center text-xl mb-4 font-bold">How to play?</h3>
     <ol class="list-decimal list-inside mb-6">

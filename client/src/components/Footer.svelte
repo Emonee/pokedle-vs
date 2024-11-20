@@ -7,10 +7,11 @@
     { name: 'Vite', url: 'https://vitejs.dev', imgSrc: root + 'img/vite_logo.svg' },
     { name: 'Svelte', url: 'https://svelte.dev', imgSrc: root + 'img/svelte_logo.png' },
     { name: 'Tailwind', url: 'https://tailwindcss.com', imgSrc: root + 'img/tailwind_logo.svg', imgWidth: 34 },
+    { name: 'Websockets', url: 'https://websockets.readthedocs.io', imgSrc: root + 'img/websockets_logo.svg' },
   ]
 </script>
 
-<footer class="flex justify-around flex-wrap gap-x-10 gap-y-2 p-4 shadow-[0px_-1px_6px_0px_#00000017]">
+<footer class="flex justify-around flex-wrap gap-x-10 gap-y-1 p-2 shadow-[0px_-1px_6px_0px_#00000017]">
   <p class="self-center">Made with ❤️ by <AnchorText href="https://github.com/emonee">Emone</AnchorText></p>
   <div class="flex items-center">
     <p class="mr-1">Powered with:</p>
