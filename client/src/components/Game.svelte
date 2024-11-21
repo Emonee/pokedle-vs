@@ -4,7 +4,7 @@
   import { sendMessage } from "../states/socket.svelte";
   import Play from "./Play.svelte";
 
-  let selectedPkm = '0'
+  let selectedPkm = $state('0')
 
   const pkmList = Object.values(pokemons.pokemons).sort((pkm1, pkm2) => +pkm1.id - +pkm2.id)
 
@@ -19,7 +19,7 @@
   }
 </script>
 
-<form {onsubmit} class="mx-auto flex flex-col gap-2 justify-center items-center mb-7">
+<form {onsubmit} class="mx-auto flex flex-col gap-2 justify-center items-center mb-10">
   <select name="pokemonNumber" class="px-4 py-2 border-2 border-slate-400 rounded-md" bind:value={selectedPkm} required>
     <option value="0" selected disabled>Choose a pokemon</option>
     {#each pkmList as pokemon}
