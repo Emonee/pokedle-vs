@@ -1,0 +1,1 @@
+concurrently --names "python,svelte" -c "blue,green" -p "[{name}-{time}]" -t "yyyy-MM-dd HH:mm:ss" "cd server && python -m pipenv run python main.py" "cd client && npm run dev"
