@@ -46,8 +46,8 @@ async def handler(websocket):
     user.disconnect()
 
 async def main():
-    async with serve(handler, "0.0.0.0", port, process_request=health_check):
-        print(f"App running at 0.0.0.0:{port}")
+    async with serve(handler, "0.0.0.0", port, process_request=health_check, server_header=None):
+        print(f"App running at localhost:{port}")
         await asyncio.get_running_loop().create_future()
 
 if __name__ == "__main__":
