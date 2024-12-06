@@ -13,7 +13,7 @@ npm install -g concurrently
 run the server and client in parallel
 
 ```sh
-./run.sh
+./run_dev.sh
 ```
 
 ## Installing dependencies
