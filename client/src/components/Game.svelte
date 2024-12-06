@@ -38,6 +38,16 @@
     <p class="text-center mb-4">Player {gameState.winner} just won!</p>
   {/if}
   <div class="flex flex-col gap-1 w-fit mx-auto">
+    <div class="flex items-center gap-2 mb-2">
+      <div class="w-20 text-center"></div>
+      <div class="w-20 text-center">Type 1</div>
+      <div class="w-20 text-center">Type 2</div>
+      <div class="w-20 text-center">Habitat</div>
+      <div class="w-20 text-center">Main color</div>
+      <div class="w-20 text-center">Evolution</div>
+      <div class="w-20 text-center">Height</div>
+      <div class="w-20 text-center">Weight</div>
+    </div>
     {#each gameState.plays.slice().reverse() as play (play.pokemon.name)}
       <Play {play} />
     {/each}
