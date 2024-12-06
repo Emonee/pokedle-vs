@@ -30,6 +30,12 @@ class User:
     def full_users():
         return len(CONNECTED_USERS) >= MAX_USERS
     
+    def to_json(self):
+        return {
+            'user_name': self.name,
+            'user_tag': self.tag
+        }
+    
     async def send_message(self, message):
         if self.socket: await self.socket.send(message)
     

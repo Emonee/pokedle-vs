@@ -1,6 +1,7 @@
 import json
 
 from custom_exceptions import InvalidAction
+from room import Room
 
 async def main_handler(message, room, user):
     try:
@@ -19,12 +20,13 @@ async def main_handler(message, room, user):
             'message': 'Unknown error'
         }))
 
-def start_game(room):
-    room.start_game()
+def start_game(room: Room):
+    game = room.start_game()
     room.broadcast_room({
         'action': 'start_game',
         'data': {
-            'room_name': room.name
+            'room_name': room.name,
+            'player_in_turn': game.players[game.player_in_turn_index].to_json(),
         }
     })
 
@@ -35,5 +37,5 @@ def play(room, user, message):
     play = room.game.play(user, pokemon_number)
     room.broadcast_room({
         'action': 'play',
-        'data': play.to_dict()
+        'data': play
     })

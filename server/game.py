@@ -3,7 +3,7 @@ from pokemons.pokemon import Pokemon
 
 class Game:
     def __init__(self, players):
-        self.players = players
+        self.players: list = players
         self.pokemon = Pokemon.get_random()
         self.turn = 0
         self.player_in_turn_index = 0
@@ -19,7 +19,10 @@ class Game:
         if self.player_in_turn_index == len(self.players) - 1: self.player_in_turn_index = 0
         else: self.player_in_turn_index += 1
         if play.pokemon.name == self.pokemon.name: self.winner = player
-        return play
+        return {
+            **(play.to_dict()),
+            'new_player_in_turn': self.players[self.player_in_turn_index].to_json()
+        }
 
 class Play:
     def __init__(self, player, pokemon_number, game_pokemon):
