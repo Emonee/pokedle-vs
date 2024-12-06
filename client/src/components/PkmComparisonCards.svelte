@@ -18,30 +18,30 @@
   }
 </script>
 
-<PkmComparisonCard state={play.matching_results.type1}>
-  <p class="text-md bg-inherit">{play.pokemon.type1}</p>
+<PkmComparisonCard animationDelay={0} state={play.matching_results.type1}>
+  {play.pokemon.type1}
 </PkmComparisonCard>
 
-<PkmComparisonCard state={play.matching_results.type2}>
-  <p class="text-md bg-inherit">{play.pokemon.type2}</p>
+<PkmComparisonCard animationDelay={0.5} state={play.matching_results.type2}>
+  {play.pokemon.type2}
 </PkmComparisonCard>
 
-<PkmComparisonCard state={play.matching_results.habitat ? 'match' : 'no_match'}>
-  <p class="text-sm bg-inherit">{play.pokemon.habitat}</p>
+<PkmComparisonCard animationDelay={1} state={play.matching_results.habitat ? 'match' : 'no_match'}>
+  {play.pokemon.habitat}
 </PkmComparisonCard>
 
-<PkmComparisonCard state={play.matching_results.colors ? 'match' : 'no_match'}>
-  <p class="text-md bg-inherit">{play.pokemon.colors}</p>
+<PkmComparisonCard animationDelay={1.5} state={play.matching_results.colors ? 'match' : 'no_match'}>
+  {play.pokemon.colors}
 </PkmComparisonCard>
 
-<PkmComparisonCard state={play.matching_results.evolution_stage ? 'match' : 'no_match'}>
-  <p class="text-md bg-inherit">{play.pokemon.evolution_stage}</p>
+<PkmComparisonCard animationDelay={2} state={play.matching_results.evolution_stage ? 'match' : 'no_match'}>
+  {play.pokemon.evolution_stage}
 </PkmComparisonCard>
 
-<PkmComparisonCard state={measureToStatus(play.matching_results.height_comparison)}>
-  <p class="text-md bg-inherit">{play.pokemon.height}</p>
+<PkmComparisonCard animationDelay={2.5} state={measureToStatus(play.matching_results.height_comparison)}>
+  {play.pokemon.height} m
 </PkmComparisonCard>
 
-<PkmComparisonCard state={measureToStatus(play.matching_results.weight_comparison)}>
-  <p class="text-md bg-inherit">{play.pokemon.weight}</p>
+<PkmComparisonCard animationDelay={3} state={measureToStatus(play.matching_results.weight_comparison)}>
+  {play.pokemon.weight} kg
 </PkmComparisonCard>
