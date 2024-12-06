@@ -64,11 +64,13 @@ function roomUsersActionHandler({ data }: MessageData, e: MessageEvent) {
 }
 
 function startGameActionHandler(messageData: MessageData, e: MessageEvent) {
-  startGame();
+  const playerInTurn = messageData.data.player_in_turn;
+  startGame({ playerInTurn });
 }
 
 function playActionHandler({ data }: MessageData, e: MessageEvent) {
   gameState.plays.push(data);
+  gameState.playerInTurn = data.new_player_in_turn;
   if (data.winning_play) gameState.winner = data.player.user_name;
 }
 

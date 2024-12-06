@@ -14,7 +14,7 @@ def main():
                 type2 = pokemon['types'][1]['type']['name']
             except:
                 type2 = None
-            f.write(f"\n{pokemon['name']},{pokemon['sprites']['front_default']},{pokemon['types'][0]['type']['name']},{type2},{specie['habitat']['name']},{specie['color']['name']},{get_evolution_stage(evolution_chain, pokemon['name'])},{pokemon['height'] * 10 / 100},{pokemon['weight'] * 100 / 1000}")
+            f.write(f"\n{num},{pokemon['name']},{pokemon['sprites']['front_default']},{pokemon['types'][0]['type']['name']},{type2},{specie['habitat']['name']},{specie['color']['name']},{get_evolution_stage(evolution_chain, pokemon['name'])},{pokemon['height'] * 10 / 100},{pokemon['weight'] * 100 / 1000}")
 
 def get_evolution_stage(evolution_chain, name):
     if len(evolution_chain['chain']['evolves_to']) < 1: return 1

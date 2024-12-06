@@ -2,7 +2,8 @@ from random import randint
 import os
 
 class Pokemon:
-    def __init__(self, name, sprite, type1, type2, habitat, colors, evolution_stage, height, weight):
+    def __init__(self, id, name, sprite, type1, type2, habitat, colors, evolution_stage, height, weight):
+        self.name = id
         self.name = name
         self.sprite = sprite
         self.type1 = type1
@@ -35,7 +36,8 @@ class Pokemon:
             random_pokemon[3],
             random_pokemon[4],
             random_pokemon[5],
-            int(random_pokemon[6]),
-            float(random_pokemon[7]),
-            float(random_pokemon[8])
+            random_pokemon[6],
+            int(random_pokemon[7]),
+            float(random_pokemon[8]),
+            float(random_pokemon[9])
         )
